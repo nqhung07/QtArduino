@@ -21,7 +21,6 @@
 */
 
 //const int ledPin = 9;      // the pin that the LED is attached to
-
 void setup() {
   // initialize the serial communication:
   Serial.begin(9600);
@@ -32,10 +31,12 @@ void setup() {
 void loop() {
   byte brightness;
   // check if data has been sent from the computer:
-  if (Serial.available()) {
-    // read the most recent byte (which will be from 0 to 255):
+  if (Serial.available()>0) {
+    // read the most recent 1 byte (which will be from 0 to 255):
     brightness = Serial.read();
-    // set the brightness of the LED:
+    // set brightness of LED
     analogWrite(LED_BUILTIN,brightness);
+    // write brightness to serial port
+    Serial.write(brightness); 
   }
 }
